@@ -7,6 +7,7 @@ COPY . .
 COPY ./apps/users/.env.* ./
 COPY ./apps/users/.env.example ./.env
 
-RUN npm install
+ENV NX_CLOUD_DISABLED=true
+RUN npm install --unsafe-perm --ignore-scripts
 
 ENV NODE_ENV=$NODE_ENV
