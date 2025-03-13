@@ -6,8 +6,7 @@ import { ExtendedPrismaClient } from '../config';
 import { UserPaginatedResponse } from '../responses';
 import { GraphQLResolveInfo } from 'graphql';
 import graphqlFields from 'graphql-fields';
-import { transformGraphQLFields } from '../utils';
-import { defaultPaginateLimit, defaultPaginatePage, GraphQlSourceService, PaginateInput } from '@cpt/graphql';
+import { defaultPaginateLimit, defaultPaginatePage, GraphQlSourceService, PaginateInput, transformGraphQLFields } from '@cpt/graphql';
 
 @injectable()
 export class UserService extends GraphQlSourceService {
