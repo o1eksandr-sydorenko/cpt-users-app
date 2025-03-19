@@ -1,6 +1,6 @@
 import { PrismaClient } from '@prisma/client';
 import { registerDecorator, ValidationOptions, ValidatorConstraint, ValidatorConstraintInterface } from 'class-validator';
-import { container } from '../config';
+import { container } from '../configs';
 import { CoreServiceIdentifiers } from '../types';
 
 @ValidatorConstraint({ async: true })

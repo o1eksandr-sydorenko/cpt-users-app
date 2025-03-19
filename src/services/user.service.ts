@@ -2,32 +2,13 @@ import { inject, injectable } from 'inversify';
 import { CoreServiceIdentifiers } from '../types';
 import { User } from '../models';
 import { CreateUserInput, UpdateUserInput } from '../inputs';
-import { ExtendedPrismaClient } from '../config';
-import { UserPaginatedResponse } from '../responses';
-import { GraphQLResolveInfo } from 'graphql';
-import graphqlFields from 'graphql-fields';
-import { defaultPaginateLimit, defaultPaginatePage, GraphQlSourceService, PaginateInput, transformGraphQLFields } from '@cpt/graphql';
+import { ExtendedPrismaClient } from '../configs';
+import { SourceService } from '@cpt/graphql';
 
 @injectable()
-export class UserService extends GraphQlSourceService {
+export class UserService extends SourceService<ExtendedPrismaClient> {
   constructor(@inject(CoreServiceIdentifiers.Clients.Prisma) protected readonly prismaClient: ExtendedPrismaClient) {
-    super();
-  }
-
-  async getPaginatedItems(info: GraphQLResolveInfo, paginate?: PaginateInput): Promise<UserPaginatedResponse> {
-    const [items, meta] = await this.prismaClient.user
-      .paginate({
-        select: transformGraphQLFields(graphqlFields(info)['items']),
-      })
-      .withPages({
-        limit: paginate?.limit || defaultPaginateLimit,
-        page: paginate?.page || defaultPaginatePage,
-      });
-
-    return {
-      items: items as User[],
-      pagination: this.createPaginateModel(meta),
-    };
+    super(prismaClient, 'user');
   }
 
   async create({ email, first_name, last_name }: CreateUserInput): Promise<User> {

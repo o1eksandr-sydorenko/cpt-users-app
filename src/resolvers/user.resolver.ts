@@ -1,12 +1,11 @@
 import { inject, injectable } from 'inversify';
-import { Arg, Info, Int, Mutation, Query, Resolver } from 'type-graphql';
+import { Arg, Args, Info, Int, Mutation, Query, Resolver } from 'type-graphql';
 import { UserServiceIdentifiers } from '../types';
 import { UserService } from '../services';
 import { User } from '../models';
-import { CreateUserInput, UpdateUserInput } from '../inputs';
+import { CreateUserInput, GetUsersArgs, UpdateUserInput } from '../inputs';
 import { UserPaginatedResponse } from '../responses';
 import { GraphQLResolveInfo } from 'graphql';
-import { PaginateInput } from '@cpt/graphql';
 
 @injectable()
 @Resolver(User)
@@ -14,11 +13,8 @@ export class UserResolver {
   constructor(@inject(UserServiceIdentifiers.Services.User) protected readonly userService: UserService) {}
 
   @Query(() => UserPaginatedResponse)
-  async getUsers(
-    @Info() info: GraphQLResolveInfo,
-    @Arg('paginate', () => PaginateInput, { nullable: true }) paginate?: PaginateInput,
-  ): Promise<UserPaginatedResponse> {
-    return this.userService.getPaginatedItems(info, paginate);
+  async getUsers(@Info() info: GraphQLResolveInfo, @Args(() => GetUsersArgs) args: GetUsersArgs): Promise<UserPaginatedResponse> {
+    return this.userService.getPaginatedItems(info, args);
   }
 
   @Mutation(() => User)
