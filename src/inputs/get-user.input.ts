@@ -1,4 +1,4 @@
-import { FilterInput, GetItemsArgs, NumberFilter, SortInput, StringFilter } from '@cpt/graphql';
+import { FilterInput, GetItemsArgs, NumberFilter, SortInput, StringFilter } from '@o1eksandr-sydorenko/cpt-graphql-lib';
 import { ArgsType, Field, InputType } from 'type-graphql';
 import { User } from '../models';
 

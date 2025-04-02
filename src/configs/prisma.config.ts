@@ -1,4 +1,4 @@
-import { paginate } from '@cpt/graphql';
+import { paginate } from '@o1eksandr-sydorenko/cpt-graphql-lib';
 import { PrismaClient } from '@prisma/client';
 import { createSoftDeleteExtension } from 'prisma-extension-soft-delete';
 

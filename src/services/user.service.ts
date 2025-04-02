@@ -3,7 +3,7 @@ import { CoreServiceIdentifiers } from '../types';
 import { User } from '../models';
 import { CreateUserInput, UpdateUserInput } from '../inputs';
 import { ExtendedPrismaClient } from '../configs';
-import { SourceService } from '@cpt/graphql';
+import { SourceService } from '@o1eksandr-sydorenko/cpt-graphql-lib';
 
 @injectable()
 export class UserService extends SourceService<ExtendedPrismaClient> {
